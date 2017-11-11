@@ -1,5 +1,5 @@
 build:
-	rm -r _build/*
+	-rm -r _build/*
 	ocamlbuild -r main.ml tac.ml ssa.ml main.native -I src
 	mv main.native main
 

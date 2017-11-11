@@ -18,7 +18,6 @@ type stmt =
   | Assign of id * exp
   | Branch of lbl list
   | Label of lbl                (* Label 0 is reserved as start. *)
-                                (* Label ~-1 is reserved as unreachable *)
 
 type tac = stmt list
 
@@ -64,6 +63,3 @@ let test_prog : tac = [
     Assign("x", Atom(Int 5));
     Branch [1; 2]
   ];;
-                 
-(* let () =  *)
-(*      printf "%s\n" (prog_to_string test_prog) *)

@@ -1,9 +1,6 @@
 open Tac
 open Printf
 
-(* Label x TAC x exit labels  *)
-(* type basic_block = int * tac * int list *)
-
 class basic_block (label : lbl) =
 object (self)
   val mutable instrs : tac = []
