@@ -1,3 +1,4 @@
+
 open Tac
 open Printf
 open Blocks
@@ -62,3 +63,32 @@ let () =
   let oc = open_out file in    (* create or truncate file, return channel *)
   fprintf oc "%s\n" message;   (* write something *)
   close_out oc;                (* flush and close the channel *)
+
+  let dom = new dom_tree (List.hd blocks) in
+  printf "%s\n" (dom#to_string ^ "\n");
+  List.iter
+    (fun block -> printf "%s\n" ((string_of_int block#get_label) ^ ": "
+                  ^ (string_of_int (dom#idom block)#get_label)))
+    blocks;
+  List.iter
+    (fun block -> printf "%s\n" ((string_of_int block#get_label) ^ ": "
+                                 ^ (List.fold_left
+                                      (fun str x ->
+                                        str ^ " "
+                                        ^ (string_of_int (x#get_label)))
+                                      ""
+                                      (dom#dominance_frontier block))))
+    blocks;
+
+      List.iter
+    (fun block -> printf "%s\n" ((string_of_int block#get_label) ^ ": "
+                                 ^ (List.fold_left
+                                      (fun str x ->
+                                        str ^ " "
+                                        ^ (string_of_int (x#get_label)))
+                                      ""
+                                      (block#predecessors))))
+    blocks
+
+
+         
