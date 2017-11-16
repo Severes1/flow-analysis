@@ -26,7 +26,8 @@ object (self)
     instrs <- (instrs @ [instr])
                 
   method add_predecessor entrance =
-    entrances <- entrance::entrances
+    if not (List.mem entrance entrances)
+    then entrances <- entrance::entrances
                              
   method add_successor exit =
     exits <- exit::exits
@@ -78,7 +79,6 @@ let rec basic_blocks (prog : tac) =
         (match stmt with
          | Label int -> guard_unique_label current rest int;
                         let new_block = new basic_block int in
-                        new_block#add_predecessor current;
 
                         (new_block,
                          rest @ [current],

@@ -12,3 +12,6 @@ run:
 	make build
 	./main
 	make graph
+
+clean:
+	rm ./src/*~
